@@ -11,6 +11,7 @@ class App extends Component {
 
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleCommentChange = this.handleCommentChange.bind(this);
+    this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
   }
 
   handleNameChange(e) {
@@ -21,6 +22,10 @@ class App extends Component {
   handleCommentChange(e) {
     const comment = e.target.value;
     this.setState({ comment }, () => console.log(this.state));
+  }
+
+  handleCommentSubmit() {
+    console.log('submit', this.state.comment);
   }
 
   render() {
@@ -40,7 +45,10 @@ class App extends Component {
           name="comment"
           value={this.state.comment}
           onChange={this.handleCommentChange}
+          onKeyDown={e => e.key === 'Enter' ? this.handleCommentSubmit() : undefined}
         />
+        <br />
+        <button type="button" onClick={this.handleCommentSubmit}>Submit</button>
       </div>
     );
   }
