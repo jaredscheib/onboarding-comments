@@ -56,5 +56,12 @@
     "webpack-dev-middleware": "^1.9.0",
     "webpack-hot-middleware": "^2.15.0",
     "whatwg-fetch": "^2.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb": "^14.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.9.0"
   }
 }
