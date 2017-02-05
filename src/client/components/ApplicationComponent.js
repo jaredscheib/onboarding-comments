@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 
 class App extends Component {
   constructor(props) {
@@ -9,23 +9,17 @@ class App extends Component {
       comment: '',
     };
 
-    this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleCommentChange = this.handleCommentChange.bind(this);
-    this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
+    this.onCommentSubmit = this.onCommentSubmit.bind(this);
   }
 
-  handleNameChange(e) {
-    const name = e.target.value;
-    this.setState({ name }, () => console.log(this.state));
+  onChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({ [`${name}`]: value }, () => console.log(name, this.state[name]));
   }
 
-  handleCommentChange(e) {
-    const comment = e.target.value;
-    this.setState({ comment }, () => console.log(this.state));
-  }
-
-  handleCommentSubmit() {
-    console.log('submit', this.state.comment);
+  onCommentSubmit() {
+    this.props.handleCommentSubmit(this.state.comment);
   }
 
   render() {
@@ -36,7 +30,7 @@ class App extends Component {
           type="text"
           name="name"
           value={this.state.name}
-          onChange={this.handleNameChange}
+          onChange={e => this.onChange(e)}
         />
         <br />
         <label htmlFor="comment">Comment: </label>
@@ -44,14 +38,22 @@ class App extends Component {
           type="text"
           name="comment"
           value={this.state.comment}
-          onChange={this.handleCommentChange}
-          onKeyDown={e => e.key === 'Enter' ? this.handleCommentSubmit() : undefined}
+          onChange={e => this.onChange(e)}
+          onKeyDown={e => e.key === 'Enter' ? this.onCommentSubmit() : undefined}
         />
         <br />
-        <button type="button" onClick={this.handleCommentSubmit}>Submit</button>
+        <button type="button" onClick={this.onCommentSubmit}>Submit</button>
       </div>
     );
   }
 }
+
+App.defaultProps = {
+  handleCommentSubmit: comment => console.log('submit', comment),
+};
+
+App.propTypes = {
+  handleCommentSubmit: PropTypes.func,
+};
 
 export default App;
