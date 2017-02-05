@@ -1,16 +1,15 @@
-import { connect,applyMiddleware } from 'react-redux'
-import ApplicationComponent from 'Components/ApplicationComponent'
-import * as actions from 'Actions'
+import { connect, applyMiddleware } from 'react-redux';
+import ApplicationComponent from '../components/ApplicationComponent';
+import * as actions from '../actions';
 
-const mapStateToProps = ( state, props ) => {
+const mapStateToProps = (state, props) => {
     return {
       ...state.Application
-    }
-}
+    };
+};
 
 const mapDispatchToProps = (dispatch) => {
-
-  //This is here for convenience.
+  // This is here for convenience.
 
   // var exceptions = {
   //   //If you need to, add an exception here.
@@ -31,12 +30,14 @@ const mapDispatchToProps = (dispatch) => {
   // });
 
   // return actions;
-  return {};
-}
+  return {
+    handleCommentSubmit(comment) { dispatch(actions.submitComment(comment)); }
+  };
+};
 
 const ApplicationContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(ApplicationComponent)
+)(ApplicationComponent);
 
-export default ApplicationContainer
+export default ApplicationContainer;

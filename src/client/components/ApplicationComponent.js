@@ -15,7 +15,7 @@ class App extends Component {
   onChange(e) {
     const name = e.target.name;
     const value = e.target.value;
-    this.setState({ [`${name}`]: value }, () => console.log(name, this.state[name]));
+    this.setState({ [`${name}`]: value }, () => console.log(`input ${name} change:`, this.state[name]));
   }
 
   onCommentSubmit() {
