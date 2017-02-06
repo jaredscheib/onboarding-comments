@@ -1,5 +1,11 @@
 // Middleware
+// import thunk from 'redux-thunk';
+import promise from 'redux-promise';
+import createLogger from 'redux-logger';
 
-export default SillyMiddlware
+const middlewares = [];
+const logger = createLogger();
 
-function SillyMiddlware(){};
+middlewares.push(promise, logger);
+
+export default middlewares;

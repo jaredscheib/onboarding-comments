@@ -1,40 +1,34 @@
-import React                  from 'react';
-import { Provider }           from 'react-redux';
-import Application            from 'Reducers/Application';
-import Promise                from 'promise-polyfill';
-import { ReactDOM,
-         render }             from 'react-dom';
+import React from 'react';
+import { Provider } from 'react-redux';
+import Promise from 'promise-polyfill';
+import { render } from 'react-dom';
 import { createStore,
          applyMiddleware,
-         combineReducers }    from 'redux';
+         combineReducers } from 'redux';
 import { Router,
          Route,
          browserHistory,
          hashHistory,
-         IndexRoute }         from 'react-router'
+         IndexRoute } from 'react-router';
 
 import {
   syncHistoryWithStore,
-  routerReducer }             from 'react-router-redux'
+  routerReducer } from 'react-router-redux';
 
-import {
-        logger,
-        thunk
-      }                       from 'Middleware';
+import middlewares from './middleware';
+// import {
 
-import {
+// } from 'Actions';
 
-} from 'Actions';
-
-
-import App                   from 'Containers/ApplicationContainer'
+import Application from './reducers/Application';
+import App from './containers/ApplicationContainer';
 
 const store = createStore(
   combineReducers({
     Application,
     routing: routerReducer
   }),
-  // applyMiddleware(thunk) see: http://redux.js.org/docs/advanced/Middleware.html
+  applyMiddleware(...middlewares)
 );
 
 const history = syncHistoryWithStore(hashHistory, store);
@@ -56,4 +50,4 @@ render(
     </Router>
   </Provider>,
   document.getElementById('app-container')
-)
+);
